@@ -1,0 +1,13 @@
+{
+  "rules": {
+    "personal_schedule": {
+      "$uid": {
+        ".write": "$uid === auth.uid"
+      }
+    },
+    "$anythingelse": {
+      ".read": "auth != null",
+      ".write": "false"
+    }
+  }
+}
