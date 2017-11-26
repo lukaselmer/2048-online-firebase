@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
-(ng lint && cd functions && webpack && firebase deploy --only functions)
+#(ng lint && cd functions && webpack && firebase deploy --only functions)
+# (tslint --fix "functions/src/**/*.ts" && cd functions && webpack && firebase deploy --only functions)
+(cd functions && webpack && firebase deploy --only functions)
