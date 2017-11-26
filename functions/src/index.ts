@@ -71,7 +71,7 @@ function setGameState(request: Request) {
 function updateScore(user: User, request: Request) {
   const gameState = request.body;
   const additionalScore = gameState.additionalScore;
-  db.ref(`users/${user.uid}/score`).set(user.score + additionalScore + 1);
+  db.ref(`users/${user.uid}/score`).set(user.score + additionalScore);
 }
 
 function removePreviousPlayersFromQueue(user: User) {}
