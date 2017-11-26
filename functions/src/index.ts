@@ -44,12 +44,11 @@ exports.refreshQueue = functions.https.onRequest((request, response) => {
 });
 
 function getUser(request: Request): Promise<any> {
-  console.log(request.params);
+  console.log('User ID:');
+  console.log(request.query);
   console.log(request.body);
 
-  // TODO: get id from request
-  return users.child('234').once('value');
-  // return getUserFromReqest(request);
+  return db.ref('users/' + request.query.userId).once('value');
 }
 
 function fillQueue() {
