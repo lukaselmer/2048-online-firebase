@@ -88,6 +88,24 @@
       }
     }
 
+    #game {
+      margin-top: 30px;
+      width: 140px;
+      margin-left: 100px;
+      margin-bottom: 200px;
+    }
+
+    #game div {
+      background: #ffa100;
+      color: #fff;
+      width: 30px;
+      height: 30px;
+      margin: 2px;
+      float: left;
+      text-align: center;
+      padding-top: 5px;
+    }
+
   </style>
 </head>
 
@@ -95,6 +113,7 @@
   <div id="message">
     <h2>Welcome to 2048</h2>
     <ul id="users"></ul>
+    <div id="game"></div>
   </div>
 
   <script>
@@ -122,14 +141,30 @@
             var li = document.createElement("li");
             li.innerText = 'Name: ' + data.name + ', Score: ' + data.score;
             list.appendChild(li);
-            console.log(data);
           });
         });
 
-        document.getElementById('load').innerHTML = `Firebase SDK loaded with ${features.join(', ')}`;
+        var game = document.getElementById('game');
+        const ref = firebase.database().ref('game/grid');
+        ref.on('value', function (sna) {
+          const sn = sna.val();
+          game.innerHTML = '';
+          const correct = [
+            sn[0], sn[4], sn[8], sn[12],
+            sn[1], sn[5], sn[9], sn[13],
+            sn[2], sn[6], sn[10], sn[14],
+            sn[3], sn[7], sn[11], sn[15],
+          ];
+          correct.forEach(x => {
+            const div = document.createElement("div");
+            div.innerText = x;
+            game.appendChild(div);
+          })
+          console.log();
+        });
+
       } catch (e) {
         console.error(e);
-        document.getElementById('load').innerHTML = 'Error loading the Firebase SDK, check the console.';
       }
     });
   </script>
